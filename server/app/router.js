@@ -5,6 +5,7 @@
  */
 module.exports = app => {
     const { router, controller } = app;
-    const userExist = app.middleware.userExist();
-    router.post('/api/hello', controller.hello.hello);
+    //const userExist = app.middleware.userExist();
+    console.log(controller);
+    router.get('/api/hello', controller.hello.hello);
 };

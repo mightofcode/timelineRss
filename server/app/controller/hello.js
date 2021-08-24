@@ -7,8 +7,9 @@ const BaseController = require('./base');
 
 class HelloController extends BaseController {
   async hello({ }) {
-    return "hello world";
+    console.log("hello");
+    this.success("hello world");
   }
 }
 
-module.exports = UserController;
+module.exports = HelloController;
