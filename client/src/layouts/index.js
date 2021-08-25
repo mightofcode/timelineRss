@@ -2,6 +2,7 @@ import { MenuBar } from '@/components';
 import { useLocation } from 'umi';
 import { StoreProvider } from 'think-react-store';
 import * as store from '../stores';
+import Tooltip from "../components/tooltip";
 
 function BasicLayout(props) {
   const location = useLocation();
@@ -16,6 +17,7 @@ function BasicLayout(props) {
       {/*  pathname={location.pathname}*/}
       {/*/>*/}
       {props.children}
+
     </StoreProvider>
   );
 }

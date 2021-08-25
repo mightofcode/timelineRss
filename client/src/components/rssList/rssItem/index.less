@@ -1,0 +1,43 @@
+@import '../../../assets/mixin.less';
+
+.RssItem {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+
+  @media screen and (max-width: 865px) {
+
+  }
+
+  > :not(:first-child) {
+
+
+  }
+
+  > :not(:last-child) {
+
+  }
+  white-space: nowrap;
+  .rssIcon{
+    margin-right: 10px;
+  }
+  .title{
+    width: 100%;
+    font-size: 13px;
+    line-height: 15px;
+    color: #333333;
+  }
+  .count{
+    font-size: 13px;
+    line-height: 15px;
+
+    color: #9E9E9E;
+
+  }
+
+
+}
