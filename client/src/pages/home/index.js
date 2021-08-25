@@ -3,9 +3,7 @@ import { useHttpHook } from '@/hooks';
 import { ErrorBoundary } from '@/components';
 
 import './index.less';
-
-
-
+import Nav from "../../components/nav";
 
 export default function (props) {
 
@@ -17,9 +15,9 @@ export default function (props) {
   return (
     <ErrorBoundary>
       <div className='home'>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
+        <Nav />
+        <Nav />
+        <Nav />
       </div>
     </ErrorBoundary>
   )

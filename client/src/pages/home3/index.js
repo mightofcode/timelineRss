@@ -23,7 +23,7 @@ export default function (props) {
 
   return (
     <ErrorBoundary>
-      <div className='home'>
+      <div className='home3'>
         <p>home1</p>
         {/*/!**header登录 *!/*/}
         {/*<Header />*/}
