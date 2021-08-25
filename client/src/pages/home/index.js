@@ -16,8 +16,6 @@ export default function (props) {
     <ErrorBoundary>
       <div className='home'>
         <Nav />
-        <Nav />
-        <Nav />
       </div>
     </ErrorBoundary>
   )
