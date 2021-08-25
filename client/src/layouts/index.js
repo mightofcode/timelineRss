@@ -7,12 +7,14 @@ function BasicLayout(props) {
   const location = useLocation();
   const paths = ['/', '/order', '/user'];
 
+  console.log(location.pathname);
+
   return (
     <StoreProvider store={store}>
-      <MenuBar
-        show={paths.includes(location.pathname)}
-        pathname={location.pathname}
-      />
+      {/*<MenuBar*/}
+      {/*  show={paths.includes(location.pathname)}*/}
+      {/*  pathname={location.pathname}*/}
+      {/*/>*/}
       {props.children}
     </StoreProvider>
   );

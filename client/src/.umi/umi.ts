@@ -9,7 +9,7 @@ import { renderClient } from '/root/timelineRss/client/node_modules/@umijs/rende
 import { getRoutes } from './core/routes';
 
 
-
+import '../global.css';
 
 const getClientRender = (args: { hot?: boolean; routes?: any[] } = {}) => plugin.applyPlugins({
   key: 'render',

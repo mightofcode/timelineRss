@@ -8,13 +8,17 @@ export function getRoutes() {
   const routes = [
   {
     "path": "/",
-    "component": require('@/layouts/index').default,
+    "component": require('@/layouts/index.js').default,
     "routes": [
       {
-        "path": "/",
-        "component": require('/root/timelineRss/client/src/pages/home/index').default,
-        "title": "首页",
-        "exact": true
+        "path": "/home",
+        "exact": true,
+        "component": require('@/pages/home/index.js').default
+      },
+      {
+        "path": "/home3",
+        "exact": true,
+        "component": require('@/pages/home3/index.js').default
       }
     ]
   }
