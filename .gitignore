@@ -13,3 +13,6 @@ run/
 typings/
 .nyc_output/
 dbData/
+*.log
+.umi
+
