@@ -11,14 +11,14 @@ export function getRoutes() {
     "component": require('@/layouts/index.js').default,
     "routes": [
       {
-        "path": "/home",
-        "exact": true,
-        "component": require('@/pages/home/index.js').default
-      },
-      {
         "path": "/home3",
         "exact": true,
         "component": require('@/pages/home3/index.js').default
+      },
+      {
+        "path": "/",
+        "exact": true,
+        "component": require('@/pages/index.js').default
       }
     ]
   }

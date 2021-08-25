@@ -1,0 +1,56 @@
+@import '../../../assets/mixin.less';
+
+.ArticleItem {
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  //
+  @media screen and (max-width: 865px) {
+
+  }
+
+  cursor: pointer;
+
+
+
+  > :not(:first-child) {
+    margin-top: 8px;
+  }
+
+  > :not(:last-child) {
+
+  }
+
+  .title{
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+
+
+    color: #333333;
+  }
+  .meta{
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+
+    color: #9E9E9E;
+
+  }
+  .content{
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+    /* or 138% */
+
+
+    color: #9E9E9E;
+
+  }
+}

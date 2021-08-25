@@ -17,7 +17,6 @@ function BasicLayout(props) {
       {/*  pathname={location.pathname}*/}
       {/*/>*/}
       {props.children}
-
     </StoreProvider>
   );
 }
