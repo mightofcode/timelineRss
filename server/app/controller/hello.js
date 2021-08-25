@@ -10,6 +10,11 @@ class HelloController extends BaseController {
     console.log("hello");
     this.success("hello world");
   }
+
+  async hello1({ }) {
+    console.log("hello1");
+    this.success("hello world");
+  }
 }
 
 module.exports = HelloController;
