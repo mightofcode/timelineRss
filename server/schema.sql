@@ -12,3 +12,17 @@ CREATE TABLE "rss" (
 "id"  INTEGER PRIMARY KEY AUTOINCREMENT,
 "url"  TEXT
 );
+
+CREATE TABLE "article" (
+"id"  INTEGER PRIMARY KEY AUTOINCREMENT,
+"rss" TEXT,
+"guid"  TEXT,
+"pubDate" TEXT,
+"pubTime" INTEGER,
+"author" TEXT,
+"content" TEXT,
+"link" TEXT,
+"readed" INTEGER,
+"title" TEXT
+);
+
