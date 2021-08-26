@@ -8,6 +8,7 @@ import RssList from "../components/rssList";
 import Tooltip from "../components/tooltip";
 import Tooltip1 from "../components/Tooltip1";
 import ArticleList from "../components/artileList";
+import ArticleWindow from "../components/articleWindow";
 
 export default function Home(props) {
 
@@ -22,6 +23,7 @@ export default function Home(props) {
         <Nav />
         <RssList/>
         <ArticleList />
+        <ArticleWindow />
       </div>
     </ErrorBoundary>
   )
