@@ -7,21 +7,46 @@ import Nav from "../../components/nav";
 import RssList from "../../components/rssList";
 import ArticleList from "../../components/artileList";
 import AddRssPanel from "./addRssPanel";
+import {Http} from "../../utils";
 
 export default function Add(props) {
 
+  const [rssList, setRssList] = useState([]);
+  const updateRssList = async () => {
+    const res=await Http({
+      url: "/rss/list", body: {
+      }
+    });
+    console.log(res)
+    setRssList(res?.rss||[]);
+  };
   useEffect(() => {
-
+    const func = async () => {
+      const res=await Http({
+        url: "/rss/list", body: {
+        }
+      });
+      console.log(res)
+      setRssList(res?.rss||[]);
+    };
+    updateRssList();
   }, [])
 
+  //
+  // const [rssList, rssListLoading] = useHttpHook({
+  //   url: '/rss/list'
+  // });
 
+  const handleRssAdded = async () => {
+    await updateRssList();
+  };
 
   return (
     <ErrorBoundary>
       <div className='addPage'>
         <Nav/>
-        <RssList/>
-        <AddRssPanel/>
+        <RssList rssList={rssList}/>
+        <AddRssPanel handleRssAdded={handleRssAdded}/>
       </div>
     </ErrorBoundary>
   )

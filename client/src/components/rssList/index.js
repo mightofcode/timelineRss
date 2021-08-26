@@ -4,20 +4,18 @@ import './index.less';
 import { history } from 'umi';
 import RssItem from "./rssItem";
 import useHttpHook from "../../hooks/useHttpHook";
-export default function RssList({}) {
+export default function RssList({rssList}) {
 
   //
-  const [rssList, rssListLoading] = useHttpHook({
-    url: '/rss/list'
-  });
+
   useEffect(() => {
 
   }, []);
 
 
   return (
-    <div className={"RssList"}>
-      {(rssList?.rss || []).map((item) => (
+    <div className={"RssList"} >
+      {(rssList || []).map((item) => (
         <RssItem key={item?.url || ""} rss={item}/>
       ))}
     </div>

@@ -4,8 +4,9 @@ import './index.less';
 import {history} from 'umi';
 import GreenBtn from "../../../../components/GreenBtn";
 import Input from "../../../../components/Input";
-
-export default function AddRssContent({}) {
+import {Http} from "../../../../utils";
+import { Toast } from 'antd-mobile';
+export default function AddRssContent({handleRssAdded}) {
 
   useEffect(() => {
 
@@ -17,15 +18,24 @@ export default function AddRssContent({}) {
   });
 
   const handleChange = (e) => {
-    setFromData({ ...formData, [e.target.name]: e.target.value });
+    setFromData({...formData, [e.target.name]: e.target.value});
     setErrors(null);
   };
   const handleClick = (e) => {
     console.log(e)
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("submit");
+    await Http({
+      url: "/rss/add", body: {
+        rss: formData?.rss,
+      }
+    });
+    Toast.success("添加成功");
+    if (handleRssAdded) {
+      await handleRssAdded();
+    }
   };
 
   return (
@@ -34,7 +44,7 @@ export default function AddRssContent({}) {
         <div className={"addRss"}>添加RSS源</div>
         <div className={"rssInput"}>
           <Input
-            style={{height:"59px","font-size":"18px","line-height":1.5,color: "#9E9E9E"}}
+            style={{height: "59px", fontSize: "18px", lineHeight: 1.5, color: "#9E9E9E"}}
             placeholder={""}
             type={"text"}
             name={"rss"}
@@ -45,8 +55,6 @@ export default function AddRssContent({}) {
         </div>
         <div className={"addRssBtn"}><GreenBtn text={"ADD"} handleClick={handleClick}/></div>
       </form>
-
-
     </div>
   )
 }

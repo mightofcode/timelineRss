@@ -9,8 +9,8 @@ export default function GreenBtn({text,handleClick}) {
   }, []);
 
   return (
-    <div className={"GreenBtn"} onClick={handleClick}>
+    <button className={"GreenBtn"} onClick={handleClick}>
       {text}
-    </div>
+    </button>
   )
 }

@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import './index.less';
 import { history } from 'umi';
 import AddRssContent from "./addRssContent";
-export default function AddRssPanel({}) {
+export default function AddRssPanel({handleRssAdded}) {
 
   useEffect(() => {
 
@@ -11,7 +11,7 @@ export default function AddRssPanel({}) {
 
   return (
     <div className={"AddRssPanel"}>
-      <AddRssContent/>
+      <AddRssContent handleRssAdded={handleRssAdded}/>
     </div>
   )
 }

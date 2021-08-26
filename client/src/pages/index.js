@@ -17,7 +17,26 @@ export default function Home(props) {
 
   }, [])
 
-  console.log("home")
+  const [rssList, setRssList] = useState([]);
+  const updateRssList = async () => {
+    const res=await Http({
+      url: "/rss/list", body: {
+      }
+    });
+    console.log(res)
+    setRssList(res?.rss||[]);
+  };
+  useEffect(() => {
+    const func = async () => {
+      const res=await Http({
+        url: "/rss/list", body: {
+        }
+      });
+      console.log(res)
+      setRssList(res?.rss||[]);
+    };
+    updateRssList();
+  }, [])
 
   const [showArticle, setShowArticle] = useState(false);
 
@@ -38,14 +57,13 @@ export default function Home(props) {
     setShowArticle(true);
     setShowArticleWindow(true);
     setShowArticleData(article);
-
   };
 
   return (
     <ErrorBoundary>
       <div className='home'>
         <Nav/>
-        <RssList/>
+        <RssList rssList={rssList}/>
         <ArticleList handleClickArticle={handleClickArticle}/>
         {showArticleWindow && <ArticleWindow handleClose={handleClose} article={showArticleData} active={showArticle}/>}
 
