@@ -1,33 +1,32 @@
-@import '../../../../assets/mixin.less';
+@import '../../assets/mixin.less';
 
-.VisitSiteBtn {
-  background-color: #fff;
-  width: 100%;
+.GreenBtn {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   position: relative;
 
+  background: #01AB27;
   border: 1px solid #E5E5E5;
   box-sizing: border-box;
-  border-radius: 3px;
-  height: 46px;
+  border-radius: 4px;
 
+  padding: 10px 28px;
+
+  font-weight: 500;
   font-size: 16px;
   line-height: 19px;
-  flex-shrink: 0;
-  /* identical to box height */
+  color: #FFFFFF;
 
   cursor: pointer;
 
-  color: #9E9E9E;
-
   &:hover {
-    border: 1px solid #CDCBCB;
+    background: #00851D;
+    border: 1px solid #E5E5E5;
     box-sizing: border-box;
-    border-radius: 3px;
+    border-radius: 4px;
   }
 
   @media screen and (max-width: 865px) {

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useHttpHook } from '@/hooks';
-import { ErrorBoundary } from '@/components';
+import React, {useState, useEffect} from 'react';
+import {useHttpHook} from '@/hooks';
+import {ErrorBoundary} from '@/components';
 
 import './index.less';
 import Nav from "../components/nav";
@@ -17,13 +17,20 @@ export default function Home(props) {
   }, [])
 
   console.log("home")
+
+  const [showArticle, setShowArticle] = useState(true);
+
+  const handleClose = () => {
+    setShowArticle(false);
+  };
+
   return (
     <ErrorBoundary>
       <div className='home'>
-        <Nav />
+        <Nav/>
         <RssList/>
-        <ArticleList />
-        <ArticleWindow />
+        <ArticleList/>
+        {showArticle && <ArticleWindow handleClose={handleClose}/>}
       </div>
     </ErrorBoundary>
   )
