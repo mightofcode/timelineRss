@@ -10,7 +10,9 @@ export default function ImportBtn({}) {
   }, []);
 
   return (
-    <div className={"ImportBtn"}>
+    <div className={"ImportBtn"} onClick={()=>{
+      history.push("/add");
+    }}>
       <Tooltip1 content="添加RSS" direction="right">
         <img src={require('../../../assets/ant-design_plus-outlined.svg')}/>
       </Tooltip1>

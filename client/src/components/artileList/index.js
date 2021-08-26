@@ -3,24 +3,26 @@ import React, {useState, useEffect} from 'react';
 import './index.less';
 import { history } from 'umi';
 import ArticleItem from "./ArticleItem";
-export default function ArticleList({}) {
+import useHttpHook from "../../hooks/useHttpHook";
+export default function ArticleList({handleClickArticle}) {
+
+  const [timeline, timelineLoading] = useHttpHook({
+    url: '/rss/timeline'
+  });
 
   useEffect(() => {
 
   }, []);
 
+
+
+
   return (
     <div className={"ArticleList"}>
-      <ArticleItem/>
-      <ArticleItem/>
-      <ArticleItem/>
-      <ArticleItem/>
-      <ArticleItem/>
-      <ArticleItem/>
-      <ArticleItem/>
-      <ArticleItem/>
-      <ArticleItem/>
-      <ArticleItem/>
+      {(timeline?.articles || []).map((item) => (
+        <ArticleItem key={item?.rss+" "+item?.guid} article={item} handleClickArticle={handleClickArticle}/>
+      ))}
+
     </div>
   )
 }

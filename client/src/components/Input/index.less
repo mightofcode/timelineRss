@@ -1,0 +1,67 @@
+@import '../../assets/mixin.less';
+
+.Input {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  @media screen and (max-width: 865px) {
+  }
+  > :not(:first-child) {
+  }
+  width: 100%;
+
+  > :not(:first-child) {
+
+  }
+
+  > :not(:last-child) {
+
+  }
+
+  .input{
+    outline: none;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    box-sizing: border-box;
+    border-radius: 4px;
+    min-height: 38px;
+    padding: 9px 12px;
+    :hover {
+      border-color: #aaaaaa;
+    }
+    :focus {
+      border-color: #aaaaaa;
+    }
+    :read-only,
+    :disabled {
+      border-color: #dddddd;
+      background: #f8f8f8;
+    }
+    :read-only {
+      ::placeholder {
+        color: #34373c;
+      }
+    }
+    ::placeholder {
+      color: #dddddd;
+    }
+    :disabled {
+      cursor: not-allowed;
+      color: #dddddd;
+    }
+    font-size: 14px;
+    line-height: 22px;
+
+    width:100%;
+  }
+  .error{
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 16px;
+    color: #ec4730;
+  }
+
+}

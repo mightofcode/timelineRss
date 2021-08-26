@@ -1,0 +1,39 @@
+@import '../../../assets/mixin.less';
+
+.CloseBtn {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  width: 35px;
+  height: 51px;
+
+  background-image: url("../../../assets/close_btn.png");
+  background-repeat: no-repeat;
+  @media screen and (max-width: 865px) {
+
+  }
+
+  > :not(:first-child) {
+
+  }
+
+  > :not(:last-child) {
+
+  }
+
+  cursor: pointer;
+  &:hover {
+
+  }
+
+  img{
+
+    position: absolute;
+    left: 15px;
+    top: 14px;
+  }
+
+}

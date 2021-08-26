@@ -14,7 +14,9 @@ export default function Nav({}) {
   console.log("home")
   return (
     <div className={"nav"}>
-      <div className={"homeIcon"} onClick={()=>{history.push("/")}}>
+      <div className={"homeIcon"} onClick={()=>{
+        history.push("/");
+      }}>
         <Tooltip1 content="TimelineRSS" direction="right">
           <img src={require('../../assets/mdi_rss-box.svg')}/>
         </Tooltip1>

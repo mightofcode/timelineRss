@@ -10,7 +10,9 @@ ON "kv" ("v" ASC);
 
 CREATE TABLE "rss" (
 "id"  INTEGER PRIMARY KEY AUTOINCREMENT,
-"url"  TEXT
+"url"  TEXT,
+"name"  TEXT,
+"icon"  TEXT
 );
 
 CREATE TABLE "article" (
