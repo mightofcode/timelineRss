@@ -4,7 +4,7 @@ import './index.less';
 import { history } from 'umi';
 import ArticleBoard from "./articleBoard";
 import CloseBtn from "./closeBtn";
-export default function ArticleWindow({handleClose}) {
+export default function ArticleWindow({handleClose,article}) {
 
   useEffect(() => {
 
@@ -13,7 +13,7 @@ export default function ArticleWindow({handleClose}) {
   return (
     <div className={"ArticleWindow"} >
       <CloseBtn handleClose={handleClose}/>
-      <ArticleBoard/>
+      <ArticleBoard article={article}/>
     </div>
   )
 }

@@ -7,7 +7,9 @@ const md5 = require('md5');
 const dayjs = require('dayjs');
 const BaseController = require('./base');
 const SqlString = require('sqlstring');
-
+let Parser = require('rss-parser');
+let parser = new Parser();
+const url = require('url'); // built-in utility
 
 class RssController extends BaseController {
     async timeline({}) {
@@ -15,8 +17,12 @@ class RssController extends BaseController {
         this.success({articles});
     }
 
+    async rssList({}) {
+        const rss = await dbAll(`select * from rss order by id asc`);
+        this.success({rss});
+    }
+
     async read({}) {
-        console.log("hello1");
         const {ctx, app} = this;
         const {rss, guid} = ctx.request.body;
         if (!rss || !guid) {
@@ -26,7 +32,6 @@ class RssController extends BaseController {
         await dbRun("update article set readed=1 where rss=? and guid=?", [rss, guid]);
         this.success("OK");
     }
-
     async add({}) {
         const {ctx, app} = this;
         const {rss} = ctx.request.body;
@@ -34,9 +39,23 @@ class RssController extends BaseController {
             this.error("params error");
             return
         }
-        const row = await dbGet(SqlString.format(`select * from rss where url=? limit 1`, [rss]));
+        let feed=null;
+        try {
+            feed = await parser.parseURL(rss);
+            console.log(feed);
+        }catch (e) {
+            console.warn(e);
+        }
+        if(!feed){
+            this.error("rss invalid");
+            return
+        }
+        const name=feed.title;
+        const icon=url.parse(feed.link).protocol+"//"+url.parse(feed.link).host+"/favicon.ico";
+
+        const row = await dbGet(`select * from rss where url=? limit 1`, [rss]);
         if (!row) {
-            await dbRun(`insert into rss (url) values ('${rss}')`);
+            await dbRun(`insert into rss (url,name,icon) values (?,?,?)`, [rss, name, icon]);
         }
         this.success("OK");
     }

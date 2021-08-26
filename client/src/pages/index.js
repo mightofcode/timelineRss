@@ -9,6 +9,7 @@ import Tooltip from "../components/tooltip";
 import Tooltip1 from "../components/Tooltip1";
 import ArticleList from "../components/artileList";
 import ArticleWindow from "../components/articleWindow";
+import {Http} from "../utils";
 
 export default function Home(props) {
 
@@ -18,10 +19,18 @@ export default function Home(props) {
 
   console.log("home")
 
-  const [showArticle, setShowArticle] = useState(true);
+  const [showArticle, setShowArticle] = useState(false);
+
+  const [showArticleData, setShowArticleData] = useState({});
 
   const handleClose = () => {
     setShowArticle(false);
+    Http({url:"/rss/read",body:{guid:showArticleData?.guid,
+        rss:showArticleData?.rss,}});
+  };
+  const handleClickArticle=(article)=>{
+    setShowArticle(true);
+    setShowArticleData(article);
   };
 
   return (
@@ -29,8 +38,8 @@ export default function Home(props) {
       <div className='home'>
         <Nav/>
         <RssList/>
-        <ArticleList/>
-        {showArticle && <ArticleWindow handleClose={handleClose}/>}
+        <ArticleList handleClickArticle={handleClickArticle}/>
+        {showArticle && <ArticleWindow handleClose={handleClose}  article={showArticleData}/>}
       </div>
     </ErrorBoundary>
   )

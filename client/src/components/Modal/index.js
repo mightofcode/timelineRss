@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CreatePortal from '../CreatePortal';
-import { Icon } from 'antd-mobile'; 
+import { Icon } from 'antd-mobile';
 
 const Styles = {
   modal: {
@@ -45,7 +45,8 @@ export default class Modal extends Component {
   handleClose = ()=>{
     const { onClose } = this.props;
     onClose && onClose();
-  }
+
+  };
 
   render() {
     const { show, styleBody, styleClose } = this.props;
