@@ -1,7 +1,19 @@
 @import '../../assets/mixin.less';
 
+
+@keyframes fadeIn {
+  0% { opacity: 0;width: 100%; height: 100%;}
+  60% { opacity: 1;width: 100%; height: 100%;}
+  100% { opacity: 1;width: 100%; height: 100%;}
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1;width: 100%; height: 100%;}
+  60% { opacity: 0;width: 100%; height: 100%;}
+  100% { opacity: 0;width: 0; height: 0;}
+}
+
 .ArticleWindow {
-  background-color: #fff;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -11,6 +23,7 @@
   justify-content: flex-end;
   position: absolute;
   background: rgba(0, 0, 0, 0.25);
+
 
   @media screen and (max-width: 865px) {
 
@@ -23,6 +36,12 @@
   > :not(:last-child) {
 
   }
-
-
+}
+.ArticleWindowShow{
+  animation: fadeIn 1s;
+  animation-fill-mode: forwards;
+}
+.ArticleWindowHide{
+  animation: fadeOut 1s;
+  animation-fill-mode: forwards;
 }

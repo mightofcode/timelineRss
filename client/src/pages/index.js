@@ -23,14 +23,22 @@ export default function Home(props) {
 
   const [showArticleData, setShowArticleData] = useState({});
 
+  const [showArticleWindow, setShowArticleWindow] = useState(false);
+
   const handleClose = () => {
     setShowArticle(false);
-    Http({url:"/rss/read",body:{guid:showArticleData?.guid,
-        rss:showArticleData?.rss,}});
+    Http({
+      url: "/rss/read", body: {
+        guid: showArticleData?.guid,
+        rss: showArticleData?.rss,
+      }
+    });
   };
-  const handleClickArticle=(article)=>{
+  const handleClickArticle = (article) => {
     setShowArticle(true);
+    setShowArticleWindow(true);
     setShowArticleData(article);
+
   };
 
   return (
@@ -39,7 +47,8 @@ export default function Home(props) {
         <Nav/>
         <RssList/>
         <ArticleList handleClickArticle={handleClickArticle}/>
-        {showArticle && <ArticleWindow handleClose={handleClose}  article={showArticleData}/>}
+        {showArticleWindow && <ArticleWindow handleClose={handleClose} article={showArticleData} active={showArticle}/>}
+
       </div>
     </ErrorBoundary>
   )
