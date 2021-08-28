@@ -12,8 +12,7 @@ export default function ArticleBoard({article}) {
   }, []);
 
   const date=new Date(article?.pubTime||0);
-  const  meta=`${article?.rss} | ${article?.author} | ${dayjs(date).format("YYYY-MM-DD hh-mm")}`;
-
+  const  meta=`${article?.rss||""} | ${article?.author||"--"} | ${dayjs(date).format("YYYY-MM-DD hh-mm")}`;
 
   return (
     <div className={"ArticleBoard"}>
