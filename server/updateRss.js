@@ -43,6 +43,7 @@ const updateRss = async () => {
 const main = async () => {
     while (true) {
         await updateRss();
+        await sleep(3000);
     }
 };
 
