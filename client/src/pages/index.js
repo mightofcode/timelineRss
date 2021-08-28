@@ -44,14 +44,19 @@ export default function Home(props) {
 
   const [showArticleWindow, setShowArticleWindow] = useState(false);
 
-  const handleClose = () => {
+  const [readedList, setReadedList] = useState([]);
+
+  const handleClose = async () => {
     setShowArticle(false);
-    Http({
+    await Http({
       url: "/rss/read", body: {
         guid: showArticleData?.guid,
         rss: showArticleData?.rss,
       }
     });
+    readedList.push(showArticleData);
+    setReadedList(readedList.slice());
+
   };
   const handleClickArticle = (article) => {
     setShowArticle(true);
@@ -59,14 +64,18 @@ export default function Home(props) {
     setShowArticleData(article);
   };
 
+  const [timeline, timelineLoading] = useHttpHook({
+    url: '/rss/timeline'
+  });
+
+
   return (
     <ErrorBoundary>
       <div className='home'>
         <Nav/>
         <RssList rssList={rssList}/>
-        <ArticleList handleClickArticle={handleClickArticle}/>
+        <ArticleList handleClickArticle={handleClickArticle} timeline={timeline} readedList={readedList}/>
         {showArticleWindow && <ArticleWindow handleClose={handleClose} article={showArticleData} active={showArticle}/>}
-
       </div>
     </ErrorBoundary>
   )

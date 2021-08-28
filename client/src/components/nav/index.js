@@ -11,7 +11,6 @@ export default function Nav({}) {
 
   }, []);
 
-  console.log("home")
   return (
     <div className={"nav"}>
       <div className={"homeIcon"} onClick={()=>{
