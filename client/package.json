@@ -5,7 +5,8 @@
     "build": "umi build",
     "test": "umi test",
     "lint": "eslint --ext .js src mock tests",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "deploy": "yarn build && cp -r dist/* /usr/share/nginx/timelinerss/ && service nginx restart"
   },
   "dependencies": {
     "dayjs": "^1.8.29",

@@ -45,7 +45,9 @@
     "cov": "egg-bin cov",
     "lint": "eslint .",
     "ci": "npm run lint && npm run cov",
-    "autod": "autod"
+    "autod": "autod",
+    "deploy-server": "pm2 start ecosystem.config.js --only timelineRssServer",
+    "deploy-update": "pm2 start ecosystem.config.js --only timelineRssUpdate"
   },
   "ci": {
     "version": "10"
