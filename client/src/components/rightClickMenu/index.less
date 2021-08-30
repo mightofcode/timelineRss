@@ -1,29 +1,29 @@
 @import '../../assets/mixin.less';
 
-.RssList {
-  width: 272px;
-  height: 100vh;
+.RightClickMenu {
+  background-color: #fff;
+  width: 148px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: flex-start;
   justify-content: flex-start;
-  position: relative;
+  position: absolute;
+  z-index: 99;
+  left: 50px;
+  top: 29px;
+  padding: 7px 0px;
 
-  background: #F6F7F8;
-  border: 1px solid #EFEFEF;
-  padding: 85px 0;
-
-  flex-shrink: 0;
-
-  overflow-y: scroll; /* Hide scrollbars */
-  overflow-x: hidden;
-
+  border: 1px solid #E5E5E5;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 5px #E5E5E5;
+  border-radius: 3px;
   @media screen and (max-width: 865px) {
 
   }
 
   > :not(:first-child) {
+
   }
 
   > :not(:last-child) {

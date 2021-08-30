@@ -30,7 +30,7 @@ export default function Add(props) {
       setRssList(res?.rss||[]);
     };
     updateRssList();
-  }, [])
+  }, []);
 
   //
   // const [rssList, rssListLoading] = useHttpHook({
@@ -45,7 +45,7 @@ export default function Add(props) {
     <ErrorBoundary>
       <div className='addPage'>
         <Nav/>
-        <RssList rssList={rssList}/>
+        <RssList rssList={rssList} handleRssRemoved={updateRssList}/>
         <AddRssPanel handleRssAdded={handleRssAdded}/>
       </div>
     </ErrorBoundary>

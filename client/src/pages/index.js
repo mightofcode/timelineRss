@@ -10,6 +10,7 @@ import Tooltip1 from "../components/Tooltip1";
 import ArticleList from "../components/artileList";
 import ArticleWindow from "../components/articleWindow";
 import {Http} from "../utils";
+import RightClickMenu from "../components/rightClickMenu";
 
 export default function Home(props) {
 
@@ -68,14 +69,14 @@ export default function Home(props) {
     url: '/rss/timeline'
   });
 
-
   return (
     <ErrorBoundary>
       <div className='home'>
         <Nav/>
-        <RssList rssList={rssList}/>
+        <RssList rssList={rssList} handleRssRemoved={updateRssList}/>
         <ArticleList handleClickArticle={handleClickArticle} timeline={timeline} readedList={readedList}/>
         {showArticleWindow && <ArticleWindow handleClose={handleClose} article={showArticleData} active={showArticle}/>}
+
       </div>
     </ErrorBoundary>
   )
