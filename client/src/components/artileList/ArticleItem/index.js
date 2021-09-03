@@ -15,7 +15,7 @@ export default function ArticleItem({article,handleClickArticle,readed=false}) {
     shortContent=shortContent.substring(0,300);
   }
   const date=new Date(article?.pubTime||0);
-  const  meta=`${article?.rss||""} | ${article?.author||"--"} | ${dayjs(date).format("YYYY-MM-DD hh-mm")}`;
+  const  meta=`${article?.name||""} | ${article?.author||"--"} | ${dayjs(date).format("YYYY-MM-DD hh-mm")}`;
   return (
     <div className={`ArticleItem  ${readed?"ArticleItemReaded":"ArticleItemUnread"}` } onClick={()=>{
       handleClickArticle(article);} }>

@@ -11,6 +11,7 @@ import ArticleList from "../components/artileList";
 import ArticleWindow from "../components/articleWindow";
 import {Http} from "../utils";
 import RightClickMenu from "../components/rightClickMenu";
+import AddRssPanel from "./add/addRssPanel";
 
 export default function Home(props) {
 
@@ -19,6 +20,11 @@ export default function Home(props) {
   }, [])
 
   const [rssList, setRssList] = useState([]);
+
+
+  //articles,add
+  const [contentType, setContentType] = useState("articles");
+
   const updateRssList = async () => {
     const res=await Http({
       url: "/rss/list", body: {
@@ -69,14 +75,21 @@ export default function Home(props) {
     url: '/rss/timeline'
   });
 
+  const handleRssAdded = async () => {
+    await updateRssList();
+  };
+
   return (
     <ErrorBoundary>
       <div className='home'>
-        <Nav/>
+        <Nav setContentType={setContentType}/>
         <RssList rssList={rssList} handleRssRemoved={updateRssList}/>
-        <ArticleList handleClickArticle={handleClickArticle} timeline={timeline} readedList={readedList}/>
-        {showArticleWindow && <ArticleWindow handleClose={handleClose} article={showArticleData} active={showArticle}/>}
+        {contentType === "articles" &&
+        <ArticleList handleClickArticle={handleClickArticle} timeline={timeline} readedList={readedList}/>}
+        {contentType === "articles" && showArticleWindow && <ArticleWindow handleClose={handleClose} article={showArticleData} active={showArticle}/>}
 
+        {contentType === "add" &&
+        <AddRssPanel handleRssAdded={handleRssAdded}/>}
       </div>
     </ErrorBoundary>
   )
