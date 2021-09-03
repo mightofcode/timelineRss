@@ -26,7 +26,7 @@ const updateRss = async () => {
     for (const k in rssList) {
         const v = rssList[k];
         console.log(v?.url);
-        const existed = await dbGet('select * from rss where url=?', v.url+"1");
+        const existed = await dbGet('select * from rss where url=?', v.url);
         if (!existed) {
             continue;
         }
