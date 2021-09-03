@@ -1,20 +1,21 @@
+const {sleep} = require("./app/utils/sleep");
+
 const {dbGet, dbAll, dbRun} = require("./app/service/db");
 
 let Parser = require('rss-parser');
 let parser = new Parser();
 
-const sleep = async (time) => {
-    return new Promise((resolve) => {
-        setTimeout(resolve, time);
-    });
-};
 
 const handleArticle = async (rss, article) => {
     const row = await dbGet("select count(*) as count from article where rss=? and guid=?", [rss, article.guid]);
     if (row.count === 0) {
         const date = new Date(article.pubDate);
         const time = date.getTime();
-        console.log(`add article ${rss} ${article.title}`);
+        const minTime = (new Date()).getTime() - 1000 * 3600 * 24 * 3;
+        if (time < minTime) {
+            return;
+        }
+        console.log(`add article ${rss} ${article?.guid} ${time} ${article?.title} `);
         await dbRun("insert into article (rss,guid,pubDate,pubTime,author,content,link,readed,title) values (?,?,?,?,?,?,?,0,?)",
             [rss, article.guid, article.pubDate, time, article.author, article.content, article.link, article.title]);
     }
@@ -23,7 +24,7 @@ const handleArticle = async (rss, article) => {
 const deleteOldArticles=async ()=>{
     const date = new Date();
     const time = date.getTime();
-    const minTime=time-1000*3600*24;
+    const minTime = time - 1000 * 3600 * 24 * 3;
     await dbRun("delete from article where pubTime < ?",minTime);
 };
 const updateRss = async () => {
