@@ -13,7 +13,7 @@ const url = require('url'); // built-in utility
 
 class RssController extends BaseController {
   async timeline({}) {
-    const articles = await dbAll(`select * from article where readed==0 order by pubTime desc limit 100`);
+    const articles = await dbAll(`select article.*,rss.name from article left join rss where article.rss==rss.url and readed==0 order by pubTime desc limit 100`);
     this.success({articles});
   }
 

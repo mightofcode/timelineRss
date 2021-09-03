@@ -20,7 +20,14 @@ const handleArticle = async (rss, article) => {
     }
 };
 
+const deleteOldArticles=async ()=>{
+    const date = new Date();
+    const time = date.getTime();
+    const minTime=time-1000*3600*24;
+    await dbRun("delete from article where pubTime < ?",minTime);
+};
 const updateRss = async () => {
+    //
     const rssList = await dbAll(`select * from rss`);
     //console.log(rssList);
     for (const k in rssList) {
@@ -47,13 +54,13 @@ const updateRss = async () => {
 
 const main = async () => {
     while (true) {
+        await deleteOldArticles();
         await updateRss();
         await sleep(3000);
     }
 };
-
 main();
 
-console.log("1");
+
 
 

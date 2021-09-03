@@ -28,3 +28,9 @@ CREATE TABLE "article" (
 "title" TEXT
 );
 
+CREATE INDEX "idx_rss"
+ON "article" ("rss" ASC);
+
+CREATE INDEX "idx_pubTime"
+ON "article" ("pubTime" ASC);
+
