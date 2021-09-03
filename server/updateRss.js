@@ -7,7 +7,7 @@ const sleep = async (time) => {
     return new Promise((resolve) => {
         setTimeout(resolve, time);
     });
-}
+};
 
 const handleArticle = async (rss, article) => {
     const row = await dbGet("select count(*) as count from article where rss=? and guid=?", [rss, article.guid]);
@@ -25,9 +25,14 @@ const updateRss = async () => {
     //console.log(rssList);
     for (const k in rssList) {
         const v = rssList[k];
-        console.log(v);
+        console.log(v?.url);
+        const existed = await dbGet('select * from rss where url=?', v.url+"1");
+        if (!existed) {
+            continue;
+        }
         try {
             const feed = await parser.parseURL(v.url);
+
             const items = feed?.items || [];
             for (const item of items) {
                 await handleArticle(v.url, item);
