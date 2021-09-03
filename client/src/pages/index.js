@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useHttpHook} from '@/hooks';
 import {ErrorBoundary} from '@/components';
+import { useStoreHook } from 'think-react-store';
 
 import './index.less';
 import Nav from "../components/nav";
@@ -15,8 +16,10 @@ import AddRssPanel from "./add/addRssPanel";
 
 export default function Home(props) {
 
-  useEffect(() => {
+  const { hello: { text, getUser, getUserAsync } } = useStoreHook();
 
+  useEffect(() => {
+    getUserAsync({});
   }, [])
 
   const [rssList, setRssList] = useState([]);
@@ -87,7 +90,6 @@ export default function Home(props) {
         {contentType === "articles" &&
         <ArticleList handleClickArticle={handleClickArticle} timeline={timeline} readedList={readedList}/>}
         {contentType === "articles" && showArticleWindow && <ArticleWindow handleClose={handleClose} article={showArticleData} active={showArticle}/>}
-
         {contentType === "add" &&
         <AddRssPanel handleRssAdded={handleRssAdded}/>}
       </div>

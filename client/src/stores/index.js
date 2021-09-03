@@ -1,7 +1,5 @@
-import house from './house';
-import user from './user';
+import hello from './hello';
 
 export {
-  house,
-  user
+  hello,
 };
