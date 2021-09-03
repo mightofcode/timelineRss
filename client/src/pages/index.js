@@ -73,6 +73,11 @@ export default function Home(props) {
     setShowArticleWindow(true);
     setShowArticleData(article);
   };
+  useEffect(()=>{
+    if(contentType==="add"){
+      setShowArticleWindow(false);
+    }
+  },[contentType]);
 
   const [timeline, timelineLoading] = useHttpHook({
     url: '/rss/timeline'

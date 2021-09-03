@@ -11,6 +11,11 @@ export default function ArticleWindow({handleClose, article,active=false}) {
 
   }, []);
 
+  useEffect(()=>{
+    return ()=>{
+    }
+  });
+
   const className=active?"ArticleWindowShow":"ArticleWindowHide";
 
 
