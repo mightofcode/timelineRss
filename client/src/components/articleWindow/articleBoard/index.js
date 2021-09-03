@@ -3,12 +3,15 @@ import React, {useState, useEffect} from 'react';
 import './index.less';
 import { history } from 'umi';
 import VisitSiteBtn from "./visitSiteBtn";
+import ReactDOM from 'react-dom';
 const dayjs = require('dayjs');
+
 export default function ArticleBoard({article}) {
 
 
   useEffect(() => {
     //
+    //ReactDOM.findDOMNode(this).scrollLeft = 0;
   }, []);
 
   const date=new Date(article?.pubTime||0);
