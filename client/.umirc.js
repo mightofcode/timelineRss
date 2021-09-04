@@ -13,7 +13,7 @@ export default defineConfig({
   },
   favicon: '/assets/favicon.ico',
   history: {
-    type: 'hash'
+    type: 'browser'
   },
   // routes: [
   //   // {

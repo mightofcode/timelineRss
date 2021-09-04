@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from 'react';
-
+import { useStoreHook } from 'think-react-store';
 import './index.less';
 import { history } from 'umi';
 import ImportBtn from "./importBtn";
 import NightBtn from "./nightBtn";
 import Tooltip1 from "../Tooltip1";
-export default function Nav({setContentType}) {
+import EditBtn from "./editBtn";
+export default function Nav({}) {
+
+  const { page: { page, setPage } } = useStoreHook();
 
   useEffect(() => {
 
@@ -15,13 +18,14 @@ export default function Nav({setContentType}) {
     <div className={"nav"}>
       <div className={"homeIcon"} onClick={()=>{
         //history.push("/");
-        setContentType("articles");
+        setPage("articles");
       }}>
         <Tooltip1 content="TimelineRSS" direction="right">
           <img src={require('../../assets/mdi_rss-box.svg')}/>
         </Tooltip1>
       </div>
-      <ImportBtn setContentType={setContentType}/>
+      <ImportBtn />
+      <EditBtn />
       {/*<NightBtn/>*/}
     </div>
   )

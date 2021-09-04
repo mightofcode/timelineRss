@@ -43,16 +43,16 @@ export default function AddRssContent({handleRssAdded}) {
       <form className={"addRssForm"} onSubmit={handleSubmit}>
         <div className={"addRss"}>添加RSS源</div>
         <div className={"rssInput"}>
-          <Input
-            style={{height: "59px", fontSize: "18px", lineHeight: 1.5, color: "#9E9E9E"}}
-            placeholder={""}
-            type={"text"}
-            name={"rss"}
-            onChange={handleChange}
-            value={formData?.rss}
-            error={errors?.data?.token}
-          />
-        </div>
+
+        </div><Input
+        style={{height: "59px", fontSize: "18px", lineHeight: 1.5, color: "#9E9E9E"}}
+        placeholder={""}
+        type={"text"}
+        name={"rss"}
+        onChange={handleChange}
+        value={formData?.rss}
+        error={errors?.data?.token}
+      />
         <div className={"addRssBtn"}><GreenBtn text={"ADD"} handleClick={handleClick}/></div>
       </form>
     </div>

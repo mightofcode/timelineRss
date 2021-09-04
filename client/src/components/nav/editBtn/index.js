@@ -4,19 +4,19 @@ import './index.less';
 import { history } from 'umi';
 import Tooltip1 from "../../Tooltip1";
 import { useStoreHook } from 'think-react-store';
-export default function ImportBtn({setContentType}) {
+export default function EditBtn({setContentType}) {
   const { page: { page, setPage } } = useStoreHook();
   useEffect(() => {
 
   }, []);
 
   return (
-    <div className={"ImportBtn"} onClick={()=>{
+    <div className={"EditBtn"} onClick={()=>{
       //history.push("/add");
-      setPage("add");
+      setPage("edit");
     }}>
-      <Tooltip1 content="添加RSS" direction="right">
-        <img src={require('../../../assets/ant-design_plus-outlined.svg')}/>
+      <Tooltip1 content="编辑RSS" direction="right">
+        <img   src={require('../../../assets/edit.svg')}/>
       </Tooltip1>
     </div>
   )

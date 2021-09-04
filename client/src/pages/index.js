@@ -13,10 +13,13 @@ import ArticleWindow from "../components/articleWindow";
 import {Http} from "../utils";
 import RightClickMenu from "../components/rightClickMenu";
 import AddRssPanel from "./add/addRssPanel";
+import EditPanel from "../components/editPanel";
 
 export default function Home(props) {
 
   const { hello: { text, getUser, getUserAsync } } = useStoreHook();
+
+  const { page: { page, showArticle,setShowArticle,showArticleWindow, setShowArticleWindow,setPage } } = useStoreHook();
 
   useEffect(() => {
     getUserAsync({});
@@ -25,8 +28,6 @@ export default function Home(props) {
   const [rssList, setRssList] = useState([]);
 
 
-  //articles,add
-  const [contentType, setContentType] = useState("articles");
 
   const updateRssList = async () => {
     const res=await Http({
@@ -48,12 +49,7 @@ export default function Home(props) {
     updateRssList();
   }, [])
 
-  const [showArticle, setShowArticle] = useState(false);
-
   const [showArticleData, setShowArticleData] = useState({});
-
-  const [showArticleWindow, setShowArticleWindow] = useState(false);
-
   const [readedList, setReadedList] = useState([]);
 
   const handleClose = async () => {
@@ -73,11 +69,6 @@ export default function Home(props) {
     setShowArticleWindow(true);
     setShowArticleData(article);
   };
-  useEffect(()=>{
-    if(contentType==="add"){
-      setShowArticleWindow(false);
-    }
-  },[contentType]);
 
   const [timeline, timelineLoading] = useHttpHook({
     url: '/rss/timeline'
@@ -90,13 +81,12 @@ export default function Home(props) {
   return (
     <ErrorBoundary>
       <div className='home'>
-        <Nav setContentType={setContentType}/>
-        <RssList rssList={rssList} handleRssRemoved={updateRssList}/>
-        {contentType === "articles" &&
-        <ArticleList handleClickArticle={handleClickArticle} timeline={timeline} readedList={readedList}/>}
-        {contentType === "articles" && showArticleWindow && <ArticleWindow handleClose={handleClose} article={showArticleData} active={showArticle}/>}
-        {contentType === "add" &&
-        <AddRssPanel handleRssAdded={handleRssAdded}/>}
+        <Nav />
+        {/*<RssList rssList={rssList} handleRssRemoved={updateRssList}/>*/}
+        {page === "articles" && <ArticleList handleClickArticle={handleClickArticle} timeline={timeline} readedList={readedList}/>}
+        {page === "articles" && showArticleWindow && <ArticleWindow handleClose={handleClose} article={showArticleData} active={showArticle}/>}
+        {page === "add" && <AddRssPanel handleRssAdded={handleRssAdded}/>}
+        {page === "edit" && <EditPanel/>}
       </div>
     </ErrorBoundary>
   )

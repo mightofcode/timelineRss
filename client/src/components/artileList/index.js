@@ -16,17 +16,17 @@ export default function ArticleList({handleClickArticle,timeline,readedList}) {
 
   return (
     <div className={"ArticleList"}>
-      {(timeline?.articles || []).map((item) => {
-
-        const filtered=readedList.filter((v) => {
-          return v.rss===item.rss&&v.guid===item.guid;
-        });
-
-        return <ArticleItem
-          key={item?.rss + " " + item?.guid} article={item} handleClickArticle={handleClickArticle}
-          readed={filtered.length!==0}
-        />;
-      })}
+      <div className={"articles"}>
+        {(timeline?.articles || []).map((item) => {
+          const filtered=readedList.filter((v) => {
+            return v.rss===item.rss&&v.guid===item.guid;
+          });
+          return <ArticleItem
+            key={item?.rss + " " + item?.guid} article={item} handleClickArticle={handleClickArticle}
+            readed={filtered.length!==0}
+          />;
+        })}
+      </div>
     </div>
   )
 }
