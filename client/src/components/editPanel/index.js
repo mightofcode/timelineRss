@@ -9,7 +9,6 @@ export default function EditPanel({}) {
 
   }, []);
 
-  console.log("1212");
   return (
     <div className={"EditPanel"}>
       <EditContent/>
