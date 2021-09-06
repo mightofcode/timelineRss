@@ -12,7 +12,8 @@ CREATE TABLE "rss" (
 "id"  INTEGER PRIMARY KEY AUTOINCREMENT,
 "url"  TEXT,
 "name"  TEXT,
-"icon"  TEXT
+"icon"  TEXT,
+"sample" REAL
 );
 
 CREATE TABLE "article" (

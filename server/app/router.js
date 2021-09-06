@@ -13,5 +13,6 @@ module.exports = app => {
   router.all('/api/rss/add', controller.rss.add);
   router.all('/api/rss/remove', controller.rss.remove);
   router.all('/api/rss/list', controller.rss.rssList);
+  router.all('/api/rss/edit', controller.rss.edit);
 
 };

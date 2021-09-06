@@ -33,6 +33,17 @@ class RssController extends BaseController {
     this.success("OK");
   }
 
+  async edit({}) {
+    const {ctx, app} = this;
+    const {rss, sample} = ctx.request.body;
+    if (!rss || !sample) {
+      this.error("params error");
+      return;
+    }
+    await dbRun("update rss set sample=? where rss=?", [sample,rss]);
+    this.success("OK");
+  }
+
   async add({}) {
     const {ctx, app} = this;
     const {rss} = ctx.request.body;
