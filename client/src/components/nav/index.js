@@ -4,8 +4,8 @@ import './index.less';
 import { history } from 'umi';
 import ImportBtn from "./importBtn";
 import NightBtn from "./nightBtn";
-import Tooltip1 from "../Tooltip1";
 import EditBtn from "./editBtn";
+import { Tooltip } from 'antd';
 export default function Nav({}) {
 
   const { page: { page, setPage } } = useStoreHook();
@@ -20,9 +20,9 @@ export default function Nav({}) {
         //history.push("/");
         setPage("articles");
       }}>
-        <Tooltip1 content="TimelineRSS" direction="right">
+        <Tooltip placement="right" title={"TimelineRSS"}>
           <img src={require('../../assets/mdi_rss-box.svg')}/>
-        </Tooltip1>
+        </Tooltip>
       </div>
       <ImportBtn />
       <EditBtn />

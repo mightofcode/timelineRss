@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 
 import './index.less';
 import { history } from 'umi';
-import Tooltip1 from "../../Tooltip1";
+import { Tooltip } from 'antd';
+//
 import { useStoreHook } from 'think-react-store';
 export default function EditBtn({setContentType}) {
   const { page: { page, setPage } } = useStoreHook();
@@ -15,9 +16,10 @@ export default function EditBtn({setContentType}) {
       //history.push("/add");
       setPage("edit");
     }}>
-      <Tooltip1 content="编辑RSS" direction="right">
+      <Tooltip placement="right" title={"编辑RSS"}>
         <img   src={require('../../../assets/edit.svg')}/>
-      </Tooltip1>
+      </Tooltip>
+
     </div>
   )
 }

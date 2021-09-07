@@ -6,8 +6,6 @@ import { useStoreHook } from 'think-react-store';
 import './index.less';
 import Nav from "../components/nav";
 import RssList from "../components/rssList";
-import Tooltip from "../components/tooltip";
-import Tooltip1 from "../components/Tooltip1";
 import ArticleList from "../components/artileList";
 import ArticleWindow from "../components/articleWindow";
 import {Http} from "../utils";

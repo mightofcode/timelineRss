@@ -20,7 +20,7 @@ export default function Input({
     setErrorValue(error);
   }, [error]);
   const handleChange = (e) => {
-    onChange(e);
+    if(onChange)onChange(e);
     setErrorValue(null);
   };
   return (

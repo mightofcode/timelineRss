@@ -7,7 +7,6 @@ import Input from "../../../../components/Input";
 import {Http} from "../../../../utils";
 import { Toast } from 'antd-mobile';
 export default function AddRssContent({handleRssAdded}) {
-
   useEffect(() => {
 
   }, []);
@@ -32,7 +31,7 @@ export default function AddRssContent({handleRssAdded}) {
         rss: formData?.rss,
       }
     });
-    Toast.success("添加成功");
+    Toast.success("添加成功",0.7);
     if (handleRssAdded) {
       await handleRssAdded();
     }

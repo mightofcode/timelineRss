@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import './index.less';
 import { history } from 'umi';
-import Tooltip1 from "../../Tooltip1";
+import { Tooltip } from 'antd';
 export default function NightBtn({}) {
 
   useEffect(() => {
@@ -11,9 +11,9 @@ export default function NightBtn({}) {
 
   return (
     <div className={"NightBtn"}>
-      <Tooltip1 content="夜间模式" direction="right">
+      <Tooltip placement="right" title={"夜间模式"}>
         <img src={require('../../../assets/fontisto_night-clear.svg')}/>
-      </Tooltip1>
+      </Tooltip>
     </div>
   )
 }

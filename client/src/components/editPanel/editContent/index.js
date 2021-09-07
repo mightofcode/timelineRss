@@ -6,23 +6,20 @@ import Input from "../../Input";
 import GreenBtn from "../../GreenBtn";
 import RedBtn from "../../RedBtn";
 import useHttpHook from "../../../hooks/useHttpHook";
+import EditRow from "../editRow";
 
+import { useStoreHook } from 'think-react-store';
 
 export default function EditContent({}) {
 
-  const [rss, rssLoading] = useHttpHook({
-    url: '/rss/list'
-  });
+  const { rssList: { rssList, setRsslist, getRssListAsync} } = useStoreHook();
   useEffect(() => {
-    console.log(rss);
-  }, [rss]);
-
-
-
+    getRssListAsync();
+  }, []);
   return (
     <div className={"EditContent"}>
       <div className={"title"}>编辑RSS</div>
-      {!rssLoading &&
+      {rssList!=null &&
       <div className={"tableWrapper"}>
         <table>
           <colgroup>
@@ -42,37 +39,8 @@ export default function EditContent({}) {
           </tr>
           </thead>
           <tbody>
-          {(rss?.rss || []).map((item) => (
-            <tr key={item?.url}>
-              <td className={"col1"}>{item?.name}</td>
-              <td className={"col2"}>{item?.unread || 0}</td>
-              {/*<td><Input*/}
-              {/*  style={{height: "23px",minHeight: "23px", fontSize: "13px", lineHeight: 0, color: "#333",padding:"0px 12px"}}*/}
-              {/*  placeholder={""}*/}
-              {/*  type={"text"}*/}
-              {/*  name={"rss"}*/}
-              {/*  onChange={null}*/}
-              {/*  value={"https://www.zhihu.com/"}*/}
-              {/*  error={null}*/}
-              {/*/></td>*/}
-              <td className={"col3"}>{item?.url}</td>
-
-              <td><Input
-                style={{height: "23px",minHeight: "23px", fontSize: "13px", lineHeight: 0, color: "#333",padding:"0px 12px"}}
-                placeholder={""}
-                type={"text"}
-                name={"rss"}
-                onChange={null}
-                value={item?.sample||1.0}
-                error={null}
-              /></td>
-              <td>
-                <div className={"ops"}>
-                  <GreenBtn text={"OK"} style={{padding:"4px 10px",fontSize:"12px",fontWeight:"500px",width:"60px",height:"23px"}}/>
-                  <RedBtn text={"DELETE"} style={{padding:"4px 10px",fontSize:"12px",fontWeight:"500px",width:"60px",height:"23px"}}/>
-                </div>
-              </td>
-            </tr>
+          {(rssList || []).map((item) => (
+            <EditRow item={item} key={item?.url}/>
           ))}
           </tbody>
         </table>

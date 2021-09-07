@@ -18,7 +18,7 @@ class RssController extends BaseController {
   }
 
   async rssList({}) {
-    const rss = await dbAll(`select * from rss order by id asc`);
+    const rss = await dbAll(`select rss.*,count(rss.url) as unread from rss left join article where rss.url=article.rss and article.readed=0 group by rss.url order by rss.id desc`);
     this.success({rss});
   }
 
@@ -40,7 +40,12 @@ class RssController extends BaseController {
       this.error("params error");
       return;
     }
-    await dbRun("update rss set sample=? where rss=?", [sample,rss]);
+    let sampleNum=parseFloat(sample);
+    if(!sampleNum||sampleNum<=0||sampleNum>1.0){
+      this.error("params error");
+      return;
+    }
+    await dbRun("update rss set sample=? where url=?", [sample,rss]);
     this.success("OK");
   }
 

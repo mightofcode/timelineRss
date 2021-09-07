@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 
 import './index.less';
 import { history } from 'umi';
-import Tooltip1 from "../../Tooltip1";
 import { useStoreHook } from 'think-react-store';
+import { Tooltip } from 'antd';
+
 export default function ImportBtn({setContentType}) {
   const { page: { page, setPage } } = useStoreHook();
   useEffect(() => {
@@ -15,9 +16,9 @@ export default function ImportBtn({setContentType}) {
       //history.push("/add");
       setPage("add");
     }}>
-      <Tooltip1 content="添加RSS" direction="right">
+      <Tooltip placement="right" title={"添加RSS"}>
         <img src={require('../../../assets/ant-design_plus-outlined.svg')}/>
-      </Tooltip1>
+      </Tooltip>
     </div>
   )
 }

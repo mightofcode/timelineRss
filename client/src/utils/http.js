@@ -46,12 +46,12 @@ export default function Http({
             window.location.hash = '#/login?from=' + window.location.pathname;
             localStorage.clear();
           }
-          Toast.fail(res.errMsg);
+          Toast.fail(res.errMsg,0.7);
           reject(res.errMsg);
         }
       })
       .catch(err => {
-        Toast.fail(err);
+        Toast.fail(err,0.7);
         reject(err);
       })
       .finally(() => {

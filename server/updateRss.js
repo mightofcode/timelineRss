@@ -8,12 +8,37 @@ const sleep = async (time) => {
         setTimeout(resolve, time);
     });
 }
+const crypto = require('crypto');
+const simpleHash=(s)=>{
+
+    const sMd5=crypto.createHash('md5').update(s).digest('hex').toString();
+    var hash = 0;
+    if (sMd5.length == 0) {
+        return hash;
+    }
+    for (var i = 0; i < sMd5.length; i++) {
+        var char = sMd5.charCodeAt(i);
+        hash = ((hash<<5)-hash)+char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
+};
 
 const handleArticle = async (rss, article) => {
+
     if(!article.guid){
         article.guid = article.link || article.title;
     }
-    const row = await dbGet("select count(*) as count from article where rss=? and guid=?", [rss, article.guid]);
+
+    const sample=rss?.sample||1.0;
+    const hash = simpleHash(article.guid);
+    const hashCliped=(Math.abs( hash)%123456)/123456;
+    if (hash > sample) {
+        console.log(`drop article ${article?.link}`);
+        return;
+    }
+    const row = await dbGet("select count(*) as" +
+        " count from article where rss=? and guid=?", [rss, article.guid]);
     if (row.count === 0) {
         const date = new Date(article.pubDate);
         const time = date.getTime();
