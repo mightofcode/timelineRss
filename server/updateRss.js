@@ -33,7 +33,7 @@ const handleArticle = async (rss, article) => {
     const sample=rss?.sample||1.0;
     const hash = simpleHash(article.guid);
     const hashCliped=(Math.abs( hash)%123456)/123456;
-    if (hash > sample) {
+    if (hashCliped > sample) {
         console.log(`drop article ${article?.link}`);
         return;
     }
