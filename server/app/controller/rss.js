@@ -46,6 +46,8 @@ class RssController extends BaseController {
       return;
     }
     await dbRun("update rss set sample=? where url=?", [sample,rss]);
+    //
+    await dbRun('delete from article where rss=?',[ rss ]);
     this.success("OK");
   }
 
