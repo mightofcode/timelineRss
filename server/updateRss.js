@@ -24,13 +24,13 @@ const simpleHash=(s)=>{
     return hash;
 };
 
-const handleArticle = async (rss, article) => {
+const handleArticle = async (rss, sampleInput,article) => {
 
     if(!article.guid){
         article.guid = article.link || article.title;
     }
 
-    const sample=rss?.sample||1.0;
+    const sample=sampleInput||1.0;
     const hash = simpleHash(article.guid);
     const hashCliped=(Math.abs( hash)%123456)/123456;
     if (hashCliped > sample) {
@@ -59,7 +59,7 @@ const updateRss = async () => {
             const feed = await parser.parseURL(v.url);
             const items = feed?.items || [];
             for (const item of items) {
-                await handleArticle(v.url, item);
+                await handleArticle(v.url,v?.sample, item);
             }
         } catch (e) {
             console.log(e);
