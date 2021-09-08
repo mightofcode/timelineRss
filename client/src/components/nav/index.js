@@ -6,8 +6,12 @@ import ImportBtn from "./importBtn";
 import NightBtn from "./nightBtn";
 import EditBtn from "./editBtn";
 import { Tooltip } from 'antd';
+
+
+
 export default function Nav({}) {
 
+  const { timeline: { articles, setArticles, getArticlesAsync} } = useStoreHook();
   const { page: { page, setPage } } = useStoreHook();
 
   useEffect(() => {
@@ -18,7 +22,11 @@ export default function Nav({}) {
     <div className={"nav"}>
       <div className={"homeIcon"} onClick={()=>{
         //history.push("/");
-        setPage("articles");
+        const func=async ()=>{
+          await getArticlesAsync();
+          await setPage("articles");
+        };
+        func();
       }}>
         <Tooltip placement="right" title={"TimelineRSS"}>
           <img src={require('../../assets/mdi_rss-box.svg')}/>

@@ -5,8 +5,8 @@ import {history} from 'umi';
 import GreenBtn from "../../../../components/GreenBtn";
 import Input from "../../../../components/Input";
 import {Http} from "../../../../utils";
-import { Toast } from 'antd-mobile';
-export default function AddRssContent({handleRssAdded}) {
+import { message } from 'antd';
+export default function AddRssContent({}) {
   useEffect(() => {
 
   }, []);
@@ -31,10 +31,7 @@ export default function AddRssContent({handleRssAdded}) {
         rss: formData?.rss,
       }
     });
-    Toast.success("添加成功",0.7);
-    if (handleRssAdded) {
-      await handleRssAdded();
-    }
+    message.info("添加成功")
   };
 
   return (

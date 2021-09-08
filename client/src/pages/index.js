@@ -13,39 +13,27 @@ import RightClickMenu from "../components/rightClickMenu";
 import AddRssPanel from "./add/addRssPanel";
 import EditPanel from "../components/editPanel";
 
+
 export default function Home(props) {
 
   const { hello: { text, getUser, getUserAsync } } = useStoreHook();
 
   const { page: { page, showArticle,setShowArticle,showArticleWindow, setShowArticleWindow,setPage } } = useStoreHook();
 
+  const { timeline: { articles, setArticles, getArticlesAsync} } = useStoreHook();
+
+  // useEffect(() => {
+  //   getUserAsync({});
+  // }, [])
+
+
   useEffect(() => {
-    getUserAsync({});
+    getArticlesAsync();
   }, [])
 
-  const [rssList, setRssList] = useState([]);
-
-
-
-  const updateRssList = async () => {
-    const res=await Http({
-      url: "/rss/list", body: {
-      }
-    });
-    console.log(res)
-    setRssList(res?.rss||[]);
-  };
-  useEffect(() => {
-    const func = async () => {
-      const res=await Http({
-        url: "/rss/list", body: {
-        }
-      });
-      console.log(res)
-      setRssList(res?.rss||[]);
-    };
-    updateRssList();
-  }, [])
+  // useEffect(() => {
+  //   console.log("articles");
+  // }, [articles])
 
   const [showArticleData, setShowArticleData] = useState({});
   const [readedList, setReadedList] = useState([]);
@@ -68,22 +56,23 @@ export default function Home(props) {
     setShowArticleData(article);
   };
 
-  const [timeline, timelineLoading] = useHttpHook({
-    url: '/rss/timeline'
-  });
-
-  const handleRssAdded = async () => {
-    await updateRssList();
-  };
+  //
+  // const [timeline, timelineLoading] = useHttpHook({
+  //   url: '/rss/timeline'
+  // });
+  //
+  // const handleRssAdded = async () => {
+  //   await updateRssList();
+  // };
 
   return (
     <ErrorBoundary>
       <div className='home'>
         <Nav />
         {/*<RssList rssList={rssList} handleRssRemoved={updateRssList}/>*/}
-        {page === "articles" && <ArticleList handleClickArticle={handleClickArticle} timeline={timeline} readedList={readedList}/>}
+        {page === "articles" && <ArticleList handleClickArticle={handleClickArticle} timeline={articles} readedList={readedList}/>}
         {page === "articles" && showArticleWindow && <ArticleWindow handleClose={handleClose} article={showArticleData} active={showArticle}/>}
-        {page === "add" && <AddRssPanel handleRssAdded={handleRssAdded}/>}
+        {page === "add" && <AddRssPanel />}
         {page === "edit" && <EditPanel/>}
       </div>
     </ErrorBoundary>

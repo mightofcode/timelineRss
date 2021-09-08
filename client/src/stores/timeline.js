@@ -6,32 +6,33 @@ import sleep from "../utils/sleep";
 
 /*
 import { useStoreHook } from 'think-react-store';
-const { rssList: { rssList, setRsslist, getRssListAsync} } = useStoreHook();
+const { timeline: { articles, setArticles, getArticlesAsync} } = useStoreHook();
  */
 export default {
   state: {
-    rssList:null,
+    articles:null,
   },
   reducers: {
-    setRsslist(state, payload){
+    setArticles(state, payload){
       const res={
         ...state,
-        rssList:payload
+        articles:payload
       };
       return res;
     },
   },
   effects: {
-    async getRssListAsync(dispatch, rootState, payload){
+    async getArticlesAsync(dispatch, rootState, payload){
       //console.log("getUserAsync")
       //
       const res=await Http({
-        url: "/rss/list", body: {
+        url: "/rss/timeline", body: {
         }
       });
+
       await dispatch({
-        type: 'setRsslist',
-        payload: res?.rss || []
+        type: 'setArticles',
+        payload: res?.articles || []
       });
     },
   }

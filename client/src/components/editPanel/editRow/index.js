@@ -6,8 +6,11 @@ import Input from "../../Input";
 import GreenBtn from "../../GreenBtn";
 import RedBtn from "../../RedBtn";
 import {Http} from "../../../utils";
-import { Toast } from 'antd-mobile';
 import { useStoreHook } from 'think-react-store';
+
+import { message } from 'antd';
+
+
 export default function EditRow({item}) {
 
   useEffect(() => {
@@ -36,7 +39,7 @@ export default function EditRow({item}) {
       }
     });
     console.log(res);
-    Toast.success("修改成功",0.7);
+    message.info("修改成功")
     await getRssListAsync();
   };
   const handleDelete=async (e)=>{
@@ -46,7 +49,7 @@ export default function EditRow({item}) {
       }
     });
     console.log(res);
-    Toast.success("删除成功",0.7);
+    message.info("删除成功")
     await getRssListAsync();
   };
 

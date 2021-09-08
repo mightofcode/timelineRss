@@ -1,5 +1,4 @@
-import { Toast } from 'antd-mobile';
-
+import { message } from 'antd';
 export default function Http({
   url,
   method = 'post',
@@ -46,12 +45,12 @@ export default function Http({
             window.location.hash = '#/login?from=' + window.location.pathname;
             localStorage.clear();
           }
-          Toast.fail(res.errMsg,0.7);
+          message.error(res.errMsg);
           reject(res.errMsg);
         }
       })
       .catch(err => {
-        Toast.fail(err,0.7);
+        message.error(err);
         reject(err);
       })
       .finally(() => {

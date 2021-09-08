@@ -1,6 +1,5 @@
 import { Http } from '@/utils';
 import sleep from "../utils/sleep";
-//import { Toast } from 'antd-mobile';
 //import { history } from 'umi';
 //import { cookie, urlGet } from 'project-libs';
 

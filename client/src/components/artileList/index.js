@@ -4,6 +4,7 @@ import './index.less';
 import { history } from 'umi';
 import ArticleItem from "./ArticleItem";
 import useHttpHook from "../../hooks/useHttpHook";
+import EmptyArticles from "./emptyArticles";
 export default function ArticleList({handleClickArticle,timeline,readedList}) {
 
   // const [timeline, timelineLoading] = useHttpHook({
@@ -16,17 +17,23 @@ export default function ArticleList({handleClickArticle,timeline,readedList}) {
 
   return (
     <div className={"ArticleList"}>
-      <div className={"articles"}>
-        {(timeline?.articles || []).map((item) => {
-          const filtered=readedList.filter((v) => {
-            return v.rss===item.rss&&v.guid===item.guid;
-          });
-          return <ArticleItem
-            key={item?.rss + " " + item?.guid} article={item} handleClickArticle={handleClickArticle}
-            readed={filtered.length!==0}
-          />;
-        })}
-      </div>
+
+      {(timeline?.length)||0 === 0 &&
+      <EmptyArticles/>
+      }
+      {(timeline?.length)||0 > 0 &&
+        <div className={"articles"}>
+          {(timeline || []).map((item) => {
+            const filtered=readedList.filter((v) => {
+              return v.rss===item.rss&&v.guid===item.guid;
+            });
+            return <ArticleItem
+              key={item?.rss + " " + item?.guid} article={item} handleClickArticle={handleClickArticle}
+              readed={filtered.length!==0}
+            />;
+          })}
+        </div>
+      }
     </div>
   )
 }

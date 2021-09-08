@@ -1,9 +1,9 @@
 import React, { useState, useEffect, memo } from 'react';
-import { Picker, List, Calendar, Button, Toast } from 'antd-mobile';
+import { Picker, List, Calendar, Button } from 'antd-mobile';
 import dayjs from 'dayjs';
 import { useHttpHook } from '@/hooks';
 import { history } from 'umi';
-
+import { message } from 'antd';
 function Search(props) {
   console.log('search render')
   // const [citys, setCitys] = useState([[{ label: '杭州', value: '10001' }, { label: '苏州', value: '10002' }]]);
@@ -37,7 +37,7 @@ function Search(props) {
         }
       });
     }else {
-      Toast.fail('请选择时间');
+      message.error("请选择时间")
     }
   };
 

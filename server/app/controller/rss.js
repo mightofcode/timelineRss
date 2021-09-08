@@ -18,7 +18,15 @@ class RssController extends BaseController {
   }
 
   async rssList({}) {
-    const rss = await dbAll(`select rss.*,count(rss.url) as unread from rss left join article where rss.url=article.rss and article.readed=0 group by rss.url order by rss.id desc`);
+    const rss=await dbAll(`select * from rss order by id desc`);
+    const rssUnread = await dbAll(`select rss.*,count(rss.url) as unread from rss left join article where rss.url=article.rss and article.readed=0 group by rss.url order by rss.id desc`);
+
+    for (const item of rss){
+      const found=rssUnread.find((v)=>{
+        return v.url===item.url;
+      });
+      item.unread = found?.unread || 0;
+    }
     this.success({rss});
   }
 
