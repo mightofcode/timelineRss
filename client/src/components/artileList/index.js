@@ -14,14 +14,15 @@ export default function ArticleList({handleClickArticle,timeline,readedList}) {
   useEffect(() => {
   }, [readedList]);
 
+  console.log(timeline);
 
   return (
     <div className={"ArticleList"}>
 
-      {(timeline?.length)||0 === 0 &&
+      {(((timeline?.length)||0) === 0) &&
       <EmptyArticles/>
       }
-      {(timeline?.length)||0 > 0 &&
+      {(((timeline?.length)||0) > 0) &&
         <div className={"articles"}>
           {(timeline || []).map((item) => {
             const filtered=readedList.filter((v) => {

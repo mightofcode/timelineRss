@@ -1,5 +1,7 @@
 'use strict';
 
+const {updateSingleRss} = require("../service/rssUpdate");
+
 const {dbGet, dbAll, dbRun} = require("../service/db");
 
 const Controller = require('egg').Controller;
@@ -56,12 +58,17 @@ class RssController extends BaseController {
     await dbRun("update rss set sample=? where url=?", [sample,rss]);
     //
     await dbRun('delete from article where rss=?',[ rss ]);
+    const addedRow=await dbGet(`select * from rss where url=? limit 1`, [rss]);
+    await updateSingleRss(addedRow);
     this.success("OK");
   }
 
   async add({}) {
     const {ctx, app} = this;
-    const {rss} = ctx.request.body;
+    let {rss} = ctx.request.body;
+    if(rss){
+      rss=rss.trim();
+    }
     if (!rss) {
       this.error("params error");
       return
@@ -83,6 +90,8 @@ class RssController extends BaseController {
     const row = await dbGet(`select * from rss where url=? limit 1`, [rss]);
     if (!row) {
       await dbRun(`insert into rss (url,name,icon) values (?,?,?)`, [rss, name, icon]);
+      const addedRow=await dbGet(`select * from rss where url=? limit 1`, [rss]);
+      updateSingleRss(addedRow);
     }
     this.success("OK");
   }
