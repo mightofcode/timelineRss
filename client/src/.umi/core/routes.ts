@@ -8,32 +8,12 @@ export function getRoutes() {
   const routes = [
   {
     "path": "/",
-    "component": require('@/layouts/index.js').default,
+    "component": require('@/layouts/index').default,
     "routes": [
       {
-        "path": "/add/addRssPanel/addRssContent",
-        "exact": true,
-        "component": require('@/pages/add/addRssPanel/addRssContent/index.js').default
-      },
-      {
-        "path": "/add/addRssPanel",
-        "exact": true,
-        "component": require('@/pages/add/addRssPanel/index.js').default
-      },
-      {
-        "path": "/add",
-        "exact": true,
-        "component": require('@/pages/add/index.js').default
-      },
-      {
-        "path": "/home3",
-        "exact": true,
-        "component": require('@/pages/home3/index.js').default
-      },
-      {
         "path": "/",
-        "exact": true,
-        "component": require('@/pages/index.js').default
+        "component": require('/root/timelineRss/client/src/pages/index').default,
+        "exact": false
       }
     ]
   }

@@ -18,8 +18,7 @@ export default function ArticleList({handleClickArticle,timeline,readedList}) {
 
   return (
     <div className={"ArticleList"}>
-
-      {(((timeline?.length)||0) === 0) &&
+      {timeline!=null &&(((timeline?.length)||0) === 0) &&
       <EmptyArticles/>
       }
       {(((timeline?.length)||0) > 0) &&

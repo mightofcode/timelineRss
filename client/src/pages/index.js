@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useHttpHook} from '@/hooks';
 import {ErrorBoundary} from '@/components';
-import { useStoreHook } from 'think-react-store';
+import {useStoreHook} from 'think-react-store';
 
 import './index.less';
 import Nav from "../components/nav";
@@ -13,27 +13,38 @@ import RightClickMenu from "../components/rightClickMenu";
 import AddRssPanel from "./add/addRssPanel";
 import EditPanel from "../components/editPanel";
 
+import {history} from 'umi';
+
 
 export default function Home(props) {
 
-  const { hello: { text, getUser, getUserAsync } } = useStoreHook();
+  const {hello: {text, getUser, getUserAsync}} = useStoreHook();
 
-  const { page: { page, showArticle,setShowArticle,showArticleWindow, setShowArticleWindow,setPage } } = useStoreHook();
+  const {page: {page, showArticle, setShowArticle, showArticleWindow, setShowArticleWindow, setPage}} = useStoreHook();
 
-  const { timeline: { articles, setArticles, getArticlesAsync} } = useStoreHook();
+  const {timeline: {articles, setArticles, getArticlesAsync}} = useStoreHook();
 
-  // useEffect(() => {
-  //   getUserAsync({});
-  // }, [])
-
+  const updatePage = async (pathname) => {
+    const pages = pathname.split("/");
+    console.log(pages);
+    if (pages.length >= 2 && pages[1] !== "") {
+      setPage(pages[1]);
+    } else {
+      setPage("articles");
+    }
+  };
 
   useEffect(() => {
     getArticlesAsync();
+    const unlisten = history.listen((location, action) => {
+      console.log("location", location.pathname);
+      updatePage(location.pathname);
+    });
+    updatePage(history.location.pathname);
+    return () => {
+      unlisten();
+    }
   }, [])
-
-  // useEffect(() => {
-  //   console.log("articles");
-  // }, [articles])
 
   const [showArticleData, setShowArticleData] = useState({});
   const [readedList, setReadedList] = useState([]);
@@ -68,11 +79,13 @@ export default function Home(props) {
   return (
     <ErrorBoundary>
       <div className='home'>
-        <Nav />
+        <Nav/>
         {/*<RssList rssList={rssList} handleRssRemoved={updateRssList}/>*/}
-        {page === "articles" && <ArticleList handleClickArticle={handleClickArticle} timeline={articles} readedList={readedList}/>}
-        {page === "articles" && showArticleWindow && <ArticleWindow handleClose={handleClose} article={showArticleData} active={showArticle}/>}
-        {page === "add" && <AddRssPanel />}
+        {page === "articles" &&
+        <ArticleList handleClickArticle={handleClickArticle} timeline={articles} readedList={readedList}/>}
+        {page === "articles" && showArticleWindow &&
+        <ArticleWindow handleClose={handleClose} article={showArticleData} active={showArticle}/>}
+        {page === "add" && <AddRssPanel/>}
         {page === "edit" && <EditPanel/>}
       </div>
     </ErrorBoundary>

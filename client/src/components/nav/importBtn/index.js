@@ -13,8 +13,7 @@ export default function ImportBtn({setContentType}) {
 
   return (
     <div className={"ImportBtn"} onClick={()=>{
-      //history.push("/add");
-      setPage("add");
+      history.push("/add");
     }}>
       <Tooltip placement="right" title={"添加RSS"}>
         <img src={require('../../../assets/ant-design_plus-outlined.svg')}/>

@@ -26,7 +26,7 @@ const handleArticle = async (rss, sampleInput,article) => {
     if (!article.guid) {
         article.guid = article.link || article.title;
     }
-    
+
     if (!article.pubDate) {
         article.pubDate = (new Date()).getTime();
     }

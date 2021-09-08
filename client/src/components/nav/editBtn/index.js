@@ -13,8 +13,7 @@ export default function EditBtn({setContentType}) {
 
   return (
     <div className={"EditBtn"} onClick={()=>{
-      //history.push("/add");
-      setPage("edit");
+      history.push("/edit");
     }}>
       <Tooltip placement="right" title={"编辑RSS"}>
         <img   src={require('../../../assets/edit.svg')}/>

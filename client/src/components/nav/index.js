@@ -8,7 +8,6 @@ import EditBtn from "./editBtn";
 import { Tooltip } from 'antd';
 
 
-
 export default function Nav({}) {
 
   const { timeline: { articles, setArticles, getArticlesAsync} } = useStoreHook();
@@ -21,10 +20,9 @@ export default function Nav({}) {
   return (
     <div className={"nav"}>
       <div className={"homeIcon"} onClick={()=>{
-        //history.push("/");
         const func=async ()=>{
           await getArticlesAsync();
-          await setPage("articles");
+          history.push("/");
         };
         func();
       }}>
