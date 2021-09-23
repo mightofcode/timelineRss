@@ -28,7 +28,11 @@ const handleArticle = async (rss, sampleInput,article) => {
     }
 
     if (!article.pubDate) {
-        article.pubDate = (new Date()).getTime();
+        const d = new Date();
+        const newTime = d.getTime() - d.getTime() % (3600 * 24 * 1000);
+        const newDate = new Date(newTime);
+        newDate.setHours(12);
+        article.pubDate = newDate.getTime();
     }
 
     const sample=sampleInput||1.0;
@@ -38,6 +42,10 @@ const handleArticle = async (rss, sampleInput,article) => {
         console.log(`drop article ${article?.link}`);
         return;
     }
+    if ((new Date()).getTime() - (new Date(article.pubDate)).getTime() > 24 * 3600 * 1000) {
+        return;
+    }
+
     const row = await dbGet("select count(*) as" +
         " count from article where rss=? and guid=?", [rss, article.guid]);
     if (row.count === 0) {
