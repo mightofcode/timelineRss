@@ -57,6 +57,7 @@ const updateSingleRss=async (rss)=>{
     }
 };
 const updateRss = async () => {
+    await dbRun(`delete from article where pubTime < ?`,[(new Date().getTime()-3600*24*1000)]);
     const rssList = await dbAll(`select * from rss`);
     for (const k in rssList) {
         const v = rssList[k];
